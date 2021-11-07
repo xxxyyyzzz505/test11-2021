@@ -8,7 +8,7 @@ export class AllService {
 
   constructor(private http: HttpClient) { }
 
-  getPosts() {
-    return this.http.get("https://jsonplaceholder.typicode.com/posts")
+  getPosts(userId: number) {
+    return this.http.get(`https://jsonplaceholder.typicode.com/comments?postId=${userId}`)
   }
 }

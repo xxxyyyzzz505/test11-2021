@@ -1,5 +1,6 @@
 import { AllService } from './../all.service';
 import { Component, OnInit } from '@angular/core';
+import { Post } from './post.model';
 // import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,17 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfiniteScrollComponent implements OnInit {
   posts: any;
-  titles: Array<string> = []
+  titles: Array<string> = [];
+
+  throttle = 0;
+  distance = 2;
+  userId = 1;
 
   constructor(private allAPI: AllService) { }
 
   ngOnInit(): void {
-    let obs$ = this.allAPI.getPosts();
-    obs$.subscribe(response => {
+    let obs$ = this.allAPI.getPosts(this.userId);
+    obs$.subscribe((response: Post[]) => {
       this.posts = response;
-      // for (let item of this.posts )
       console.log(this.posts)
     });  
+  }
+
+  onScroll() {
+    this.allAPI.getPosts(++this.userId)
+    .subscribe((response: Post[]) => {
+      this.posts.push(...response);
+      console.log(this.posts)
+    });
   }
 
 
