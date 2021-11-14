@@ -1,0 +1,20 @@
+<div class="body">
+    <h1>Range Slider</h1>
+    <div class="slidecontainer">
+        <span>
+        <input type="range" min="1" max="200" 
+            [value]="imageSize" 
+            (input)="onChange($event)"
+            [(ngModel)]="imageSize"
+            class="slider" id="myRange">
+        
+            <input type="number" min="1" max="200" [(ngModel)]="imageSize">
+        </span>
+    </div>
+    <p> Image Size: {{imageSize}}</p>
+
+    <div class="image">
+        <img src="../../assets/image/1.jpg" alt="colored photo"
+            [ngStyle]="{ 'width.vw': imageSize / 2}">
+    </div>
+</div>
