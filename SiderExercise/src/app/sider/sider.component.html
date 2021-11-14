@@ -3,18 +3,26 @@
     <div class="slidecontainer">
         <span>
         <input type="range" min="1" max="200" 
-            [value]="imageSize" 
-            (input)="onChange($event)"
+            
+            (input)="onInput($event)"
             [(ngModel)]="imageSize"
             class="slider" id="myRange">
-        
-            <input type="number" min="1" max="200" [(ngModel)]="imageSize">
+            <input type="number" min="1" max="200" [(ngModel)]="imageSize"><label for="imageSize">%</label>
         </span>
     </div>
     <p> Image Size: {{imageSize}}</p>
-
-    <div class="image">
+    <div class="canvas" (mousedown)="onMousedown($event)"
+    (mousemove)="onMousemove($event)"
+    (mouseup)="onMouseup($event)">
+    <h1>Mouse Event Section</h1>
+    </div>
+    <div class="image" 
+        >
         <img src="../../assets/image/1.jpg" alt="colored photo"
-            [ngStyle]="{ 'width.vw': imageSize / 2}">
+            [ngStyle]="{ 'width.%': imageSize}">
     </div>
 </div>
+
+        (mousedown)="onMousedown($event)"
+        (mousemove)="onMousemove($event)"
+        (mouseup)="onMouseup($event)"
